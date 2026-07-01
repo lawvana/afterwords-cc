@@ -108,30 +108,55 @@
       margin-right: auto;
     }
 
-    .sid-block {
-      background: rgba(201, 168, 76, 0.08);
-      border: 1px solid rgba(201, 168, 76, 0.25);
-      border-radius: 4px;
-      padding: 28px 32px;
-      margin: 0 auto 52px;
-      max-width: 620px;
+    .sid-section {
+      max-width: 640px;
+      margin: 0 auto 60px;
       text-align: left;
     }
 
-    .sid-quote {
-      font-size: 1.2rem;
+    .sid-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 24px;
+    }
+
+    .sid-story {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(245, 240, 232, 0.82);
+    }
+
+    .sid-story p {
+      margin-bottom: 1.2em;
+    }
+
+    .sid-story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sid-pull {
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+      margin: 32px 0;
+      font-size: 1.25rem;
       font-style: italic;
       color: var(--gold-light);
       line-height: 1.6;
-      margin-bottom: 12px;
     }
 
     .sid-attribution {
       font-family: 'Arial', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
       color: var(--muted);
       text-transform: uppercase;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
 
     .how-it-works {
@@ -264,9 +289,24 @@
 
     <p class="sub-tagline">An AI-powered vault that holds your voice, your letters, your final messages — and delivers them to the people who matter most, exactly when they need to hear from you.</p>
 
-    <div class="sid-block">
-      <p class="sid-quote">"Well, I guess I am the last person you all expected to hear from today."</p>
-      <p class="sid-attribution">— Sid Oakley, Cedar Creek Gallery, Creedmoor NC &nbsp;·&nbsp; His cassette tape. His funeral. His last word. Everybody laughed.</p>
+    <div class="sid-section">
+      <p class="sid-label">The story that started everything</p>
+      <div class="sid-story">
+        <p>Sid Oakley built Cedar Creek Gallery in Creedmoor, NC over a lifetime. Artists. Potters. Painters. People who made things with their hands. He built a home for them — and they built a community around him.</p>
+        <p>When Sid died, the people who loved him filled a church.</p>
+        <p>The preacher walked to the lectern. But instead of speaking, he reached down and placed a small cassette player on the edge of the pulpit. Bent the microphone toward it. And pressed play.</p>
+        <p>The room went quiet.</p>
+        <p>Then:</p>
+
+        <div class="sid-pull">
+          "Well, I guess I am the last person you all expected to hear from today."
+        </div>
+
+        <p>Everybody laughed. And then everybody cried. Because it was Sid — his voice, his timing, his particular gift for walking into a room and making it feel like home.</p>
+        <p>He had recorded it himself. Before he died. He knew his people would need to hear him one more time.</p>
+        <p><strong style="color: var(--cream);">Afterwords is built so everyone can do what Sid did.</strong></p>
+      </div>
+      <p class="sid-attribution">Sid Oakley &nbsp;·&nbsp; Cedar Creek Gallery &nbsp;·&nbsp; Creedmoor, NC</p>
     </div>
 
     <div class="how-it-works">
