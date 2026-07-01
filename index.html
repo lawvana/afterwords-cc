@@ -215,39 +215,58 @@
       margin-bottom: 28px;
     }
 
-    .email-form {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .founding-box {
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 4px;
+      padding: 36px 32px;
       max-width: 480px;
       margin: 0 auto;
+      background: rgba(201, 168, 76, 0.04);
     }
 
-    .email-form input {
-      flex: 1;
-      min-width: 220px;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 3px;
-      color: var(--cream);
-      font-size: 0.95rem;
+    .founding-price {
+      font-size: 3rem;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .founding-price span {
       font-family: 'Arial', sans-serif;
-      outline: none;
+      font-size: 1rem;
+      color: var(--muted);
+      vertical-align: middle;
     }
 
-    .email-form input::placeholder { color: var(--muted); }
-    .email-form input:focus { border-color: var(--gold); }
+    .founding-includes {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 16px 0 24px;
+      text-align: left;
+    }
 
-    .email-form button {
-      padding: 14px 28px;
+    .founding-includes li {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .founding-includes li::before {
+      content: '✓ ';
+      color: var(--gold);
+    }
+
+    .swipe-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 28px;
       background: var(--gold);
       color: var(--ink);
       border: none;
       border-radius: 3px;
       font-family: 'Arial', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: bold;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -255,7 +274,16 @@
       transition: background 0.2s;
     }
 
-    .email-form button:hover { background: var(--gold-light); }
+    .swipe-btn:hover { background: var(--gold-light); }
+    .swipe-btn:disabled { opacity: 0.6; cursor: wait; }
+
+    .founding-fine {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 14px;
+      opacity: 0.7;
+    }
 
     footer {
       position: relative;
@@ -328,12 +356,21 @@
     </div>
 
     <div class="cta-block">
-      <h2 class="cta-headline">Be first to know when we launch.</h2>
-      <p class="cta-sub">No spam. No sales pitch. Just a note when Afterwords is ready for you.</p>
-      <form class="email-form" onsubmit="return false;">
-        <input type="email" placeholder="your@email.com" autocomplete="email">
-        <button type="submit">Notify Me</button>
-      </form>
+      <h2 class="cta-headline">Become a founding member.</h2>
+      <p class="cta-sub">Lock in lifetime access before we open to the public. Includes your Afterwords Session.</p>
+      <div class="founding-box">
+        <div class="founding-price">$99 <span>one time · lifetime access</span></div>
+        <ul class="founding-includes">
+          <li>Your 30-minute Afterwords Session (Granola-recorded)</li>
+          <li>AI-shaped letters for every person who matters</li>
+          <li>Encrypted vault — nobody reads it until the time comes</li>
+          <li>Timed delivery to your people, in your words</li>
+          <li>WillVana estate planning consult included</li>
+          <li>Founding member rate locked forever</li>
+        </ul>
+        <button class="swipe-btn" id="checkoutBtn">Reserve My Spot — $99</button>
+        <p class="founding-fine">Secure checkout via Stripe. One-time payment. No subscription.</p>
+      </div>
     </div>
 
   </main>
@@ -357,6 +394,36 @@
       `;
       container.appendChild(s);
     }
+
+    // Show success message if returning from Stripe
+    if (window.location.search.includes('success=true')) {
+      document.querySelector('.cta-block').innerHTML = `
+        <div style="border:1px solid rgba(201,168,76,0.4);border-radius:4px;padding:40px 32px;max-width:480px;margin:0 auto;background:rgba(201,168,76,0.06);">
+          <div style="font-size:2.5rem;margin-bottom:16px;">✓</div>
+          <h2 style="font-size:1.6rem;font-weight:normal;color:var(--cream);margin-bottom:12px;">You're in.</h2>
+          <p style="font-family:Arial,sans-serif;font-size:0.9rem;color:var(--muted);line-height:1.7;">Welcome to Afterwords. We'll be in touch to schedule your session.<br><br>In the meantime — think about what you'd want your people to hear.</p>
+        </div>`;
+      history.replaceState({}, '', '/');
+    }
+
+    // Stripe checkout
+    document.getElementById('checkoutBtn').addEventListener('click', async function() {
+      this.disabled = true;
+      this.textContent = 'Opening checkout…';
+      try {
+        const res = await fetch('/.netlify/functions/checkout', { method: 'POST' });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Checkout failed');
+        }
+      } catch (e) {
+        this.disabled = false;
+        this.textContent = 'Reserve My Spot — $99';
+        alert('Something went wrong. Please try again or call (919) 510-7900.');
+      }
+    });
   </script>
 
 </body>
