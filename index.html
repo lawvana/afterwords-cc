@@ -418,19 +418,10 @@
     }
 
     // Checkout
-    document.getElementById('checkoutBtn').addEventListener('click', async function() {
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
       this.disabled = true;
       this.textContent = 'Opening checkout…';
-      try {
-        const res = await fetch('/.netlify/functions/checkout', { method: 'POST' });
-        const data = await res.json();
-        if (data.url) { window.location.href = data.url; }
-        else throw new Error(data.error || 'Checkout failed');
-      } catch (e) {
-        this.disabled = false;
-        this.textContent = 'Reserve My Spot — $349';
-        alert('Something went wrong. Please try again.');
-      }
+      window.location.href = 'https://buy.stripe.com/dRm7sD58I3aldlx5RU7wA05';
     });
   </script>
 </body>
