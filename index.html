@@ -4,274 +4,267 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Afterwords — Your Voice. Your Legacy. Your Last Word.</title>
-  <meta name="description" content="Don't die just yet — not until you've had your Afterwords. The AI-powered voice that speaks for you after you're gone.">
+  <meta name="description" content="Don't die just yet — not until you've had your Afterwords. The AI-powered vault that holds your voice and delivers it to the people who matter most.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #1a1a2e;
+      --ink: #0f0f1a;
+      --ink2: #161625;
       --gold: #c9a84c;
       --gold-light: #e8c97e;
       --cream: #f5f0e8;
-      --muted: #6b6b6b;
+      --muted: #6b6b7e;
+      --border: rgba(255,255,255,0.07);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--ink);
       color: var(--cream);
       font-family: 'Georgia', serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       overflow-x: hidden;
     }
 
     /* Stars */
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0;
+      position: absolute; width: 1px; height: 1px;
+      background: white; border-radius: 50%; opacity: 0;
       animation: twinkle var(--d, 4s) var(--delay, 0s) infinite;
     }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: var(--op, 0.6); }
-    }
+    @keyframes twinkle { 0%,100%{opacity:0} 50%{opacity:var(--op,0.5)} }
 
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
-      width: 90%;
+    /* Layout */
+    section { position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 24px 60px;
     }
 
     .eyebrow {
       font-family: 'Arial', sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
+      font-size: 10px; letter-spacing: 5px;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-      opacity: 0.85;
+      color: var(--gold); opacity: 0.8;
+      margin-bottom: 36px;
     }
 
-    h1 {
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      line-height: 1.1;
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: 1.0;
       font-weight: normal;
-      color: var(--cream);
-      margin-bottom: 12px;
+      max-width: 900px;
+      margin-bottom: 8px;
     }
 
-    h1 em {
+    .hero h1 em {
       color: var(--gold-light);
       font-style: italic;
     }
 
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 32px auto;
-      opacity: 0.6;
-    }
-
-    .tagline {
-      font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-      line-height: 1.7;
-      color: var(--cream);
-      opacity: 0.9;
-      margin-bottom: 20px;
-    }
-
-    .sub-tagline {
-      font-family: 'Arial', sans-serif;
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 48px;
+    .hero-sub {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: rgba(245,240,232,0.65);
       max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .sid-section {
-      max-width: 640px;
-      margin: 0 auto 60px;
-      text-align: left;
-    }
-
-    .sid-label {
+      line-height: 1.75;
+      margin: 28px auto 0;
       font-family: 'Arial', sans-serif;
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 24px;
+      font-weight: normal;
     }
 
-    .sid-story {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: rgba(245, 240, 232, 0.82);
+    /* Waveform divider */
+    .wave-divider {
+      width: 100%; max-width: 700px;
+      margin: 56px auto;
+      opacity: 0.25;
     }
 
-    .sid-story p {
-      margin-bottom: 1.2em;
+    /* HOW IT WORKS */
+    .how-section {
+      padding: 0 24px 100px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .sid-story p:last-child {
-      margin-bottom: 0;
-    }
-
-    .sid-pull {
-      border-left: 2px solid var(--gold);
-      padding-left: 24px;
-      margin: 32px 0;
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--gold-light);
-      line-height: 1.6;
-    }
-
-    .sid-attribution {
+    .section-label {
       font-family: 'Arial', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 1.5px;
-      color: var(--muted);
+      font-size: 10px; letter-spacing: 5px;
       text-transform: uppercase;
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--gold); opacity: 0.7;
+      text-align: center;
+      margin-bottom: 48px;
     }
 
-    .how-it-works {
+    .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-bottom: 56px;
-      text-align: left;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
     .step {
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px;
-      background: rgba(255,255,255,0.02);
+      background: var(--ink2);
+      padding: 36px 32px;
     }
 
     .step-num {
       font-family: 'Arial', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      font-size: 0.65rem; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
     }
 
     .step h3 {
-      font-size: 1rem;
-      font-weight: normal;
-      color: var(--cream);
-      margin-bottom: 8px;
+      font-size: 1.25rem; font-weight: normal;
+      color: var(--cream); margin-bottom: 12px;
+      line-height: 1.3;
     }
 
     .step p {
       font-family: 'Arial', sans-serif;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.6;
+      font-size: 0.85rem; color: var(--muted);
+      line-height: 1.7;
     }
 
-    .cta-block {
-      margin-bottom: 24px;
+    /* GRANOLA BADGE */
+    .powered-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-top: 32px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem; color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    .powered-row svg { opacity: 0.5; }
+
+    /* SID SECTION */
+    .sid-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    .sid-intro {
+      font-family: 'Arial', sans-serif;
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .sid-story {
+      font-size: 1.08rem; line-height: 1.9;
+      color: rgba(245,240,232,0.78);
+    }
+
+    .sid-story p { margin-bottom: 1.3em; }
+    .sid-story p:last-child { margin-bottom: 0; }
+
+    .sid-cassette {
+      text-align: center;
+      margin: 44px 0;
+    }
+
+    .sid-cassette svg { opacity: 0.35; }
+
+    .sid-pull {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-style: italic;
+      color: var(--gold-light);
+      line-height: 1.5;
+      padding: 0 20px;
+      margin: 8px 0 44px;
+    }
+
+    .sid-credit {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      text-align: center; margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* FOUNDING MEMBER */
+    .cta-section {
+      padding: 0 24px 100px;
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .cta-headline {
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      color: var(--cream);
-      margin-bottom: 10px;
-      font-weight: normal;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: normal; color: var(--cream);
+      margin-bottom: 12px; line-height: 1.2;
     }
 
     .cta-sub {
       font-family: 'Arial', sans-serif;
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 28px;
+      font-size: 0.9rem; color: var(--muted);
+      margin-bottom: 36px; line-height: 1.7;
     }
 
     .founding-box {
-      border: 1px solid rgba(201, 168, 76, 0.4);
+      border: 1px solid rgba(201,168,76,0.35);
       border-radius: 4px;
-      padding: 36px 32px;
-      max-width: 480px;
-      margin: 0 auto;
-      background: rgba(201, 168, 76, 0.04);
+      padding: 40px 36px;
+      background: rgba(201,168,76,0.03);
     }
 
     .founding-price {
-      font-size: 3rem;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-      line-height: 1;
+      font-size: 3.5rem; color: var(--gold-light);
+      line-height: 1; margin-bottom: 6px;
     }
 
-    .founding-price span {
+    .founding-price small {
       font-family: 'Arial', sans-serif;
-      font-size: 1rem;
-      color: var(--muted);
+      font-size: 0.85rem; color: var(--muted);
       vertical-align: middle;
     }
 
-    .founding-includes {
-      font-family: 'Arial', sans-serif;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.8;
-      margin: 16px 0 24px;
-      text-align: left;
+    .founding-divider {
+      width: 40px; height: 1px;
+      background: rgba(201,168,76,0.3);
+      margin: 24px auto;
     }
 
-    .founding-includes li {
+    .founding-includes {
       list-style: none;
-      padding-left: 0;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem; color: var(--muted);
+      line-height: 2; text-align: left;
+      margin-bottom: 28px;
     }
 
     .founding-includes li::before {
-      content: '✓ ';
+      content: '— ';
       color: var(--gold);
     }
 
     .swipe-btn {
-      display: block;
-      width: 100%;
-      padding: 16px 28px;
-      background: var(--gold);
-      color: var(--ink);
-      border: none;
-      border-radius: 3px;
+      display: block; width: 100%;
+      padding: 17px 28px;
+      background: var(--gold); color: var(--ink);
+      border: none; border-radius: 3px;
       font-family: 'Arial', sans-serif;
-      font-size: 0.9rem;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
+      font-size: 0.85rem; font-weight: bold;
+      letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s;
     }
 
     .swipe-btn:hover { background: var(--gold-light); }
@@ -279,20 +272,18 @@
 
     .founding-fine {
       font-family: 'Arial', sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 14px;
-      opacity: 0.7;
+      font-size: 0.7rem; color: var(--muted);
+      margin-top: 14px; opacity: 0.6;
     }
 
+    /* FOOTER */
     footer {
-      position: relative;
-      z-index: 1;
-      padding: 32px 20px;
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
       text-align: center;
       font-family: 'Arial', sans-serif;
-      font-size: 0.75rem;
-      color: var(--muted);
+      font-size: 0.72rem; color: var(--muted);
       letter-spacing: 0.5px;
     }
 
@@ -302,129 +293,142 @@
 </head>
 <body>
 
-  <!-- Stars -->
   <div class="stars" id="stars"></div>
 
-  <main>
-    <p class="eyebrow">Coming Soon &nbsp;·&nbsp; afterwords.cc</p>
-
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">afterwords.cc &nbsp;·&nbsp; coming soon</p>
     <h1>Don't die just yet.</h1>
     <h1>Not until you've had<br>your <em>Afterwords.</em></h1>
+    <p class="hero-sub">Your will handles your assets.<br>Afterwords handles your words.</p>
 
-    <div class="divider"></div>
+    <svg class="wave-divider" viewBox="0 0 700 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 20 Q17.5 5 35 20 Q52.5 35 70 20 Q87.5 5 105 20 Q122.5 35 140 20 Q157.5 5 175 20 Q192.5 35 210 20 Q227.5 5 245 20 Q262.5 35 280 20 Q297.5 5 315 20 Q332.5 35 350 20 Q367.5 5 385 20 Q402.5 35 420 20 Q437.5 5 455 20 Q472.5 35 490 20 Q507.5 5 525 20 Q542.5 35 560 20 Q577.5 5 595 20 Q612.5 35 630 20 Q647.5 5 665 20 Q682.5 35 700 20" stroke="#c9a84c" stroke-width="1.5"/>
+    </svg>
+  </section>
 
-    <p class="tagline">Your will handles your assets.<br><strong>Afterwords handles your words.</strong></p>
-
-    <p class="sub-tagline">An AI-powered vault that holds your voice, your letters, your final messages — and delivers them to the people who matter most, exactly when they need to hear from you.</p>
-
-    <div class="sid-section">
-      <p class="sid-label">The story that started everything</p>
-      <div class="sid-story">
-        <p>Sid Oakley built Cedar Creek Gallery in Creedmoor, NC over a lifetime. Artists. Potters. Painters. People who made things with their hands. He built a home for them — and they built a community around him.</p>
-        <p>When Sid died, the people who loved him filled a church.</p>
-        <p>The preacher walked to the lectern. But instead of speaking, he reached down and placed a small cassette player on the edge of the pulpit. Bent the microphone toward it. And pressed play.</p>
-        <p>The room went quiet.</p>
-        <p>Then:</p>
-
-        <div class="sid-pull">
-          "Well, I guess I am the last person you all expected to hear from today."
-        </div>
-
-        <p>Everybody laughed. And then everybody cried. Because it was Sid — his voice, his timing, his particular gift for walking into a room and making it feel like home.</p>
-        <p>He had recorded it himself. Before he died. He knew his people would need to hear him one more time.</p>
-        <p><strong style="color: var(--cream);">Afterwords is built so everyone can do what Sid did.</strong></p>
-      </div>
-      <p class="sid-attribution">Sid Oakley &nbsp;·&nbsp; Cedar Creek Gallery &nbsp;·&nbsp; Creedmoor, NC</p>
-    </div>
-
-    <div class="how-it-works">
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <p class="section-label">How it works</p>
+    <div class="steps">
       <div class="step">
-        <p class="step-num">Step 01</p>
-        <h3>Build your vault.</h3>
-        <p>Write letters to your children. Record your eulogy. Leave instructions. Say what you always meant to say. Take your time — you have it.</p>
+        <span class="step-num">01 — Record</span>
+        <h3>Have the conversation.</h3>
+        <p>In a 30-minute Afterwords Session, you tell your story. Your words. Your people. What you want them to know. We handle the rest.</p>
       </div>
       <div class="step">
-        <p class="step-num">Step 02</p>
-        <h3>Name your people.</h3>
-        <p>Choose who receives what, and when. Your executor. Your kids. Your best friend. Your congregation. Your law partners.</p>
+        <span class="step-num">02 — Lock</span>
+        <h3>Your vault. Your rules.</h3>
+        <p>AI shapes your session into letters, messages, a eulogy — whatever you want. Encrypted. Private. Nobody reads it until the time comes.</p>
       </div>
       <div class="step">
-        <p class="step-num">Step 03</p>
-        <h3>Rest easy.</h3>
-        <p>Afterwords watches. When the time comes, your voice is delivered — automatically, personally, exactly as you intended.</p>
+        <span class="step-num">03 — Deliver</span>
+        <h3>Your voice, when they need it.</h3>
+        <p>When the time comes, Afterwords delivers your words to your people — in order, on schedule, exactly as you intended.</p>
       </div>
     </div>
+    <div class="powered-row">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1"/><path d="M5 8h6M8 5v6" stroke="#c9a84c" stroke-width="1"/></svg>
+      Sessions recorded and transcribed via Granola &nbsp;·&nbsp; AI-shaped into your deliverables
+    </div>
+  </section>
 
-    <div class="cta-block">
-      <h2 class="cta-headline">Become a founding member.</h2>
-      <p class="cta-sub">Lock in lifetime access before we open to the public. Includes your Afterwords Session.</p>
-      <div class="founding-box">
-        <div class="founding-price">$99 <span>one time · lifetime access</span></div>
-        <ul class="founding-includes">
-          <li>Your 30-minute Afterwords Session (Granola-recorded)</li>
-          <li>AI-shaped letters for every person who matters</li>
-          <li>Encrypted vault — nobody reads it until the time comes</li>
-          <li>Timed delivery to your people, in your words</li>
-          <li>WillVana estate planning consult included</li>
-          <li>Founding member rate locked forever</li>
-        </ul>
-        <button class="swipe-btn" id="checkoutBtn">Reserve My Spot — $99</button>
-        <p class="founding-fine">Secure checkout via Stripe. One-time payment. No subscription.</p>
-      </div>
+  <!-- SID'S STORY -->
+  <section class="sid-section">
+    <p class="sid-intro">The story that started this</p>
+
+    <div class="sid-story">
+      <p>Sid Oakley built Cedar Creek Gallery in Creedmoor, NC over a lifetime. When he died, the people who loved him filled a church.</p>
+
+      <p>The preacher walked to the lectern — but instead of speaking, he bent the microphone down toward a small cassette player sitting on the edge of the pulpit. And pressed play.</p>
+
+      <p>The room went quiet.</p>
     </div>
 
-  </main>
+    <div class="sid-cassette">
+      <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="112" height="52" rx="6" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="32" cy="30" r="12" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="32" cy="30" r="4" stroke="#c9a84c" stroke-width="1"/>
+        <circle cx="88" cy="30" r="12" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="88" cy="30" r="4" stroke="#c9a84c" stroke-width="1"/>
+        <path d="M44 30 Q60 22 76 30" stroke="#c9a84c" stroke-width="1" stroke-dasharray="2 2"/>
+        <rect x="48" y="42" width="24" height="6" rx="1" stroke="#c9a84c" stroke-width="0.8"/>
+      </svg>
+    </div>
+
+    <p class="sid-pull">"Well, I guess I am the last person<br>you all expected to hear from today."</p>
+
+    <div class="sid-story">
+      <p>Everybody laughed. And then everybody cried. Because it was Sid — his voice, his timing, his particular gift for walking into a room and making it feel like home.</p>
+      <p>He had recorded it himself. He knew his people would need to hear him one more time.</p>
+      <p><strong style="color:var(--cream);">Afterwords is built so everyone can do what Sid did.</strong></p>
+    </div>
+
+    <p class="sid-credit">Sid Oakley &nbsp;·&nbsp; Cedar Creek Gallery &nbsp;·&nbsp; Creedmoor, NC</p>
+  </section>
+
+  <!-- FOUNDING MEMBER CTA -->
+  <section class="cta-section">
+    <h2 class="cta-headline">Become a<br>founding member.</h2>
+    <p class="cta-sub">Lock in lifetime access before we open to the public.<br>Includes your Afterwords Session.</p>
+
+    <div class="founding-box" id="ctaBox">
+      <div class="founding-price">$99 <small>· lifetime access</small></div>
+      <div class="founding-divider"></div>
+      <ul class="founding-includes">
+        <li>Your 30-minute Afterwords Session</li>
+        <li>AI-shaped letters for every person who matters</li>
+        <li>Encrypted vault — private until the time comes</li>
+        <li>Timed delivery in your words, to your people</li>
+        <li>WillVana estate planning consult included</li>
+        <li>Founding rate locked forever</li>
+      </ul>
+      <button class="swipe-btn" id="checkoutBtn">Reserve My Spot — $99</button>
+      <p class="founding-fine">Secure checkout via Stripe · One-time payment · No subscription</p>
+    </div>
+  </section>
 
   <footer>
-    <p>afterwords.cc &nbsp;·&nbsp; A <a href="https://lawvana.com">LawVana™</a> concept &nbsp;·&nbsp; &copy; 2026 Barker Richardson, PLLC</p>
+    <p>afterwords.cc &nbsp;·&nbsp; A <a href="https://lawvana.com" target="_blank" rel="noopener">LawVana™</a> product &nbsp;·&nbsp; &copy; 2026 LawVana™</p>
   </footer>
 
   <script>
-    // Generate stars
+    // Stars
     const container = document.getElementById('stars');
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 150; i++) {
       const s = document.createElement('div');
       s.className = 'star';
-      s.style.cssText = `
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-        --d: ${3 + Math.random() * 5}s;
-        --delay: ${Math.random() * 6}s;
-        --op: ${0.3 + Math.random() * 0.7};
-      `;
+      s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${3+Math.random()*6}s;--delay:${Math.random()*8}s;--op:${0.3+Math.random()*0.6};width:${Math.random()>0.9?2:1}px;height:${Math.random()>0.9?2:1}px`;
       container.appendChild(s);
     }
 
-    // Show success message if returning from Stripe
+    // Success state
     if (window.location.search.includes('success=true')) {
-      document.querySelector('.cta-block').innerHTML = `
-        <div style="border:1px solid rgba(201,168,76,0.4);border-radius:4px;padding:40px 32px;max-width:480px;margin:0 auto;background:rgba(201,168,76,0.06);">
-          <div style="font-size:2.5rem;margin-bottom:16px;">✓</div>
-          <h2 style="font-size:1.6rem;font-weight:normal;color:var(--cream);margin-bottom:12px;">You're in.</h2>
-          <p style="font-family:Arial,sans-serif;font-size:0.9rem;color:var(--muted);line-height:1.7;">Welcome to Afterwords. We'll be in touch to schedule your session.<br><br>In the meantime — think about what you'd want your people to hear.</p>
+      document.getElementById('ctaBox').innerHTML = `
+        <div style="padding:20px 0;text-align:center;">
+          <div style="font-size:2rem;color:var(--gold);margin-bottom:16px;">✓</div>
+          <h3 style="font-size:1.4rem;font-weight:normal;color:var(--cream);margin-bottom:12px;">You're in.</h3>
+          <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:var(--muted);line-height:1.8;">Welcome to Afterwords.<br>We'll reach out to schedule your session.<br><br>In the meantime — think about what you'd want your people to hear.</p>
         </div>`;
       history.replaceState({}, '', '/');
     }
 
-    // Stripe checkout
+    // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', async function() {
       this.disabled = true;
       this.textContent = 'Opening checkout…';
       try {
         const res = await fetch('/.netlify/functions/checkout', { method: 'POST' });
         const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.error || 'Checkout failed');
-        }
+        if (data.url) { window.location.href = data.url; }
+        else throw new Error(data.error || 'Checkout failed');
       } catch (e) {
         this.disabled = false;
         this.textContent = 'Reserve My Spot — $99';
-        alert('Something went wrong. Please try again or call (919) 510-7900.');
+        alert('Something went wrong. Please try again.');
       }
     });
   </script>
-
 </body>
 </html>
